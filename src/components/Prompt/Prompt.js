@@ -1,30 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import useChat from "../../hooks/useChat";
 import { Button } from "reactstrap";
 import axios from "axios";
+
 import './styles.css'
 
 export function Prompt(){
-
+    const {chat, addChat} = useChat()
     const [userPrompt, setUserPrompt] = useState("")
-    useEffect(
-    () => {
-        console.log(userPrompt)
-    }, 
-    [userPrompt])
+    // useEffect(
+    // () => {
+    // }, 
+    // [userPrompt])
 
     const submitPrompt = async (e) => {
         e.preventDefault()
-        const req = await axios.post(
-            'https://globant-challenge.free.beeceptor.com',
-            {
-                prompt: userPrompt
-            }
-        )
-        const resp = await req.data
-        if (resp.data) {
-
-        }
-
+        const req = await axios.get(
+            `http://127.0.0.1:5000/api/v1/guru-pront?client-question=${userPrompt}`,
+        )  
+       addChat(req.data)      
     }
     return(
         <div
@@ -35,7 +29,9 @@ export function Prompt(){
             onSubmit={submitPrompt}
             >
                 <div>
-                <label>Cuentanos sobre tu expectativa en el mercado de pases</label>
+                <label>
+                Describe que tipo de jugador buscas y el presupuesto disponible
+                </label>
                 </div>
                 <div>
                 <textarea
@@ -44,7 +40,7 @@ export function Prompt(){
                     type="text"
                     value={userPrompt}
                     onChange={(e) => setUserPrompt(e.target.value)}
-                    placeholder="Describe la posicion que quieres reforzar en tu equipo y tu presupuesto"
+                    placeholder="Describe que tipo de jugador buscas y el presupuesto disponible"
                 />
                 <div
                 className="submit-container__form"

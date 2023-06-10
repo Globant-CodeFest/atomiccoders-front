@@ -1,14 +1,16 @@
 .results-container{
     display:flex;
     max-width: 60vw;
-    
+    flex-wrap: wrap;
+    overflow: scroll;
+
 }
 
 .player-card{
     width: 50%;
     max-width: 15rem;
     background-color: rgb(184, 210, 225);
-    margin: 0 1rem;
+    margin: 1rem 1rem;
     padding: 1rem;
     border: 1px solid black;
     border-radius: 10px;

@@ -9,7 +9,8 @@ import {
     List,
     Button 
 } from "reactstrap"
-
+import { useEffect } from "react"
+import useChat from "../../hooks/useChat"
 import "./styles.css"
 
 
@@ -149,17 +150,29 @@ export function Result(props) {
             "wage_eur": 1000000
         }
     ]
+    const {chat} = useChat()
+    useEffect(()=>{
+        console.log(chat)
+    }, [chat])
   return (
     <CardGroup className="results-container">
       {
-        data.length > 0 &&
-        data.map((elm) => { 
+        data.length > 0 ?
+        chat.map((elm) => { 
             return(
                 <Player
                 player={elm}
                 />
             )
         })
+        :
+        <div>
+            <h1>Usa estos tips para</h1>
+            <ul>
+                <li>Declara el tipo de jugador (Ej: Delantero, Defensa, Centro campista)</li>
+                <li>Declara tu presupuesto (Ej: Tengo hasta 50.000 EUR) </li>
+            </ul>
+        </div>
       }
     </CardGroup>
   );
