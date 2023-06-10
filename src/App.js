@@ -1,4 +1,5 @@
-import { Home } from "./screens/Home";
+import { Home } from "./screens/Home/Home";
+
 function App() {
   return (
     <div className="App">
